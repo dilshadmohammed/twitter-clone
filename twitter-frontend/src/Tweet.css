@@ -1,0 +1,77 @@
+.message-box{
+    width: 30rem;
+    padding: 1rem 1.5rem;
+    border: 2px solid rgb(213, 213, 213);
+    border-radius: 10px;
+    background-color: white;
+  }
+  
+  .user-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  .name {
+    text-align: left;
+    flex: 3;
+    margin-bottom: 1rem;
+  }
+ .name span {
+    display: block;
+    font-weight: 400;
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.863);
+  }
+  small {
+    color: rgba(128, 128, 128, 0.945);
+    font-size: 0.7rem;
+  }
+  
+  .profile_pic {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    margin-right: 0.6rem;
+    border: 2px solid rgb(213, 213, 213);
+    flex: 1;
+  }
+  .message {
+    font-weight: 200;
+    line-height: 1.5;
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+
+  .icons img{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  .icons span{
+    float: left;
+    font-weight: 400;
+    font-size: 1.18rem;
+    color: rgba(0, 0, 0, 0.863);
+    user-select: none;
+  }
+  .heart{
+    float: inline-start;
+    margin-right: 2px;
+  }
+
+
+  .edit-icon{
+    float: right;
+    margin-right: 15px;
+  }
+
+.delete-icon{
+    float: inline-end;
+  }
+
+
+  .icons button:hover{
+    background-color: rgb(255, 49, 49);
+  }

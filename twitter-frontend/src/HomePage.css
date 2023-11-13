@@ -1,0 +1,44 @@
+.main-container{
+    display: grid;
+    grid-template-rows: auto auto auto;
+}
+
+header{
+    background-color: rgb(89, 175, 255);
+    height: auto;
+}
+header h2{
+    display: inline;
+    font-size: 3rem;
+    float: inline-start;
+    margin: 0.25rem 0 0 1rem;
+    color: white;
+}
+header img{
+    display: inline;
+    height: 4rem;
+    float: left;
+    margin-left: 20px;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 92vh;
+}
+
+.tweet-section{
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.tweet-section::-webkit-scrollbar{
+    display: none;
+}
+
+.feed{
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 5px;
+}

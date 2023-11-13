@@ -1,0 +1,46 @@
+.new-tweet {
+    display: grid;
+    grid-template-rows: auto;
+    width: inherit;
+    height: 10rem;
+    padding: 0.8rem;
+    border: 2px solid rgb(213, 213, 213);
+    border-radius: 10px;
+    background-color: white;
+    margin: 0.65rem 0 0.65rem 0;
+
+  }
+  
+  .new-message{
+    appearance: none;
+    resize: none; /* Disable manual resizing */
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: inherit;
+    height: 7.5rem;
+    border: none;
+    font-weight: 200;
+    line-height: 1.5;
+    font-size: 1rem;
+    text-align: left;
+    overflow: hidden;
+  }
+
+  .new-tweet button{
+    margin-left:auto;
+    width: fit-content;
+    height: 1.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    color: white;
+    background-color: rgb(77, 154, 226);
+    border-style: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .new-tweet button:hover{
+    background-color: rgb(86, 173, 255);
+  }
