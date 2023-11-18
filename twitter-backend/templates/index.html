@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Clone</title>
+    <style>
+        .tweet-container {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Twitter Clone</h1>
+    <form action="/add_tweet" method="post">
+        <label for="content">Tweet:</label>
+        <input type="text" name="content" required>
+        <button type="submit">Tweet</button>
+    </form>
+    {% for tweet in tweets %}
+        <div class="tweet-container">
+            <p>{{ tweet.content }}</p>
+            <button onclick="editTweet('{{ tweet.id }}', '{{ tweet.content }}')">Edit</button>
+            <form action="/delete_tweet/{{ tweet.id }}" method="post" style="display: inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    {% endfor %}
+
+    <script>
+        function editTweet(id, content) {
+            var newContent = prompt("Edit your tweet:", content);
+            if (newContent !== null) {
+                // You can send an AJAX request to the server to update the tweet content
+                // For simplicity, prompt is used here, and you can modify this according to your needs
+                window.location.href = "/edit_tweet/" + id + "?content=" + encodeURIComponent(newContent);
+            }
+        }
+    </script>
+</body>
+</html>
+
