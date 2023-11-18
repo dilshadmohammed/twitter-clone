@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './HomePage.css'
 import Tweet from './Tweet'
 import NewTweet from './NewTweet'
 
-function HomePage() {
+
+
+
+function HomePage({...user}) {
+
   const initialTweets = [
     { "id": 1,
       "name": "John Doe",
