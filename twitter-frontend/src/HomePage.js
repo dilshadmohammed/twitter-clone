@@ -39,7 +39,11 @@ function HomePage({...user}) {
     }
   ];
   const [tweets,setTweets] = useState(initialTweets)
-
+  const Logout = () => {
+  
+    localStorage.removeItem('user');
+    window.location.reload();
+  };
   const addNewTweet = (text) => {
     const newTweet = {
       id: tweets.length + 1,
@@ -62,6 +66,7 @@ function HomePage({...user}) {
       <header>
         <h2>twitter</h2>
         <img src="/images/twitter_logo.png" alt="" />
+        <button onClick={Logout}>Logout</button>
       </header>
       <main>
         <div className="tweet-section">

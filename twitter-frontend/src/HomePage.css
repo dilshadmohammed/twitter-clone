@@ -21,6 +21,27 @@ header img{
     margin-left: 20px;
 }
 
+header button{
+    width: 7%;
+    height: 70%;
+    margin: 8px;
+    float: right;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgb(77, 154, 226);
+    background-color: white;
+    border-style: none;
+    border-radius: 6px;
+    cursor: pointer;
+
+}
+
+header button:hover{
+    background-color: rgb(185, 207, 237);
+    color: white;
+}
+
 main{
     display: flex;
     flex-direction: column;
