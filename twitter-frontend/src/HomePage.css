@@ -2,7 +2,7 @@
     display: grid;
     grid-template-rows: auto auto auto;
 }
-
+/* 
 header{
     background-color: rgb(89, 175, 255);
     height: auto;
@@ -14,12 +14,21 @@ header h2{
     margin: 0.25rem 0 0 1rem;
     color: white;
 }
+
 header img{
     display: inline;
     height: 4rem;
     float: left;
     margin-left: 20px;
 }
+
+header span{
+    font-size: 1rem;
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
 
 header button{
     width: 7%;
@@ -38,6 +47,56 @@ header button{
 }
 
 header button:hover{
+    background-color: rgb(185, 207, 237);
+    color: white;
+} */
+header {
+    background-color:rgb(89, 175,  255);
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px; /* Add padding to give some space around the elements */
+}
+
+header .left-container,
+header .right-container {
+    display: flex;
+    align-items: center;
+}
+
+header h2 {
+    font-size: 3rem;
+    color: white;
+    margin: 0.25rem 0 0 0;
+}
+
+header img {
+    height: 4rem;
+    margin-left: 10px; /* Add margin to separate h2 and img */
+}
+
+header .right-container span {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 400;
+}
+
+header .right-container button {
+    width: fit-content;
+    height: 2.5rem;
+    margin: 0 4px 0 20px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgb(77, 154, 226);
+    background-color: white;
+    border-style: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+header button:hover {
     background-color: rgb(185, 207, 237);
     color: white;
 }

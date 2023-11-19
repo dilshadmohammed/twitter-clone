@@ -36,8 +36,8 @@
 
 .login-page button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid rgb(89, 175,  255);
+	background-color: rgb(89, 175,  255);
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -163,9 +163,9 @@
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background:  rgb(79, 158, 254);
+	background: -webkit-linear-gradient(to right,rgb(89, 175,  255), rgb(79, 158, 254));
+	background: linear-gradient(to right,rgb(89, 175,  255),  rgb(79, 158, 254));
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -219,45 +219,11 @@
 	transform: translateX(20%);
 }
 
-.social-container a {
-	border: 1px solid #DDDDDD;
-	border-radius: 50%;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 5px;
-	height: 40px;
-	width: 40px;
-}
 
-.login-page footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
-
-.login-page footer p {
-    margin: 10px 0;
-}
-
-.login-page footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
 .error-message{
 	margin-top: 10px;
 	bottom: 100px;
 	font-style: italic;
-	color: #FF4B2B;
+	color: red;
 	font-size: 12px;
 }
