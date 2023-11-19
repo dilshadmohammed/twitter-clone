@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './HomePage.css'
 import Tweet from './Tweet'
 import NewTweet from './NewTweet'
+import axios from './axios';
 
 
 
@@ -25,7 +26,7 @@ function HomePage({...user}) {
     },
     { "id": 3,
       "name": "Bob Johnson",
-      "username": "bobjohnson",
+      "username": "dilshadvln",
       "message": "Coding all night long! Building something awesome and pushing my limits.",
       "likes": 30,
       "liked":true
@@ -38,7 +39,15 @@ function HomePage({...user}) {
       "liked":false
     }
   ];
+  
   const [tweets,setTweets] = useState(initialTweets)
+  axios.get(`/get-tweets/${user.user_id}`)
+  .then(response => {
+    setTweets(response.data)
+  })
+  .catch(error => {
+    console.error('Error fetching tweets:', error);
+  });
   const Logout = () => {
   
     localStorage.removeItem('user');
@@ -47,8 +56,8 @@ function HomePage({...user}) {
   const addNewTweet = (text) => {
     const newTweet = {
       id: tweets.length + 1,
-      name:'Dilshad',
-      username:'dilshadvln',
+      name:user.name,
+      username:user.username,
       message: text,
       likes:0
 
@@ -64,16 +73,21 @@ function HomePage({...user}) {
   return (
     <div className="main-container">
       <header>
-        <h2>twitter</h2>
-        <img src="/images/twitter_logo.png" alt="" />
-        <button onClick={Logout}>Logout</button>
+        <div className="left-container">
+          <h2>twitter</h2>
+          <img src="/images/twitter_logo.png" alt="" />
+        </div>
+        <div className="right-container">
+          <span>@{user.username}</span>
+          <button onClick={Logout}>Logout</button>
+        </div>
       </header>
       <main>
         <div className="tweet-section">
           <NewTweet addNewTweet={addNewTweet}/>
           <div className="feed">
           {tweets.map((tweet) => (
-              <Tweet key={tweet.id} {...tweet}  onDelete={() => handleDeleteTweet(tweet.id)}/>
+              <Tweet key={tweet.id} {...tweet} ownTweet={tweet.username === user.username} onDelete={() => handleDeleteTweet(tweet.id)}/>
             ))}
           </div>
         </div>

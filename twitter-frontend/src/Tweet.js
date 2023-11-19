@@ -3,7 +3,7 @@ import { useState } from 'react'
 import './Tweet.css'
 
 
-function Tweet({id, name, username, message, likes, liked, onDelete }) {
+function Tweet({id, name, username, message, likes, liked, ownTweet, onDelete, user }) {
   const [like, setLike] = useState(liked);
   const [likeCount, setLikeCount] = useState(likes);
   const [tweet,setTweet] = useState(message);
@@ -51,8 +51,12 @@ function Tweet({id, name, username, message, likes, liked, onDelete }) {
       <div className="icons">
         <img src={like ? "/images/heart_liked.png" : "/images/heart_notliked.png"} onClick={handleLike} alt="likes" className="heart" />
         <span>{likeCount}</span>
-        <img src="/images/delete.png" alt="delete" className='delete-icon' onClick={()=>{onDelete(id)}}/>
-        <img src="/images/edit_icon.png" onClick={()=>{setEditMode(true)}} alt="edit" className="edit-icon" />
+        {ownTweet && 
+        <div>
+          <img src="/images/delete.png" alt="delete" className='delete-icon' onClick={()=>{onDelete(id)}}/>
+          <img src="/images/edit_icon.png" onClick={()=>{setEditMode(true)}} alt="edit" className="edit-icon" />
+        </div>
+        }
         
       </div>
     </div>
