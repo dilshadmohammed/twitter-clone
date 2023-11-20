@@ -9,45 +9,18 @@ import axios from './axios';
 
 function HomePage({...user}) {
 
-  const initialTweets = [
-    { "id": 1,
-      "name": "John Doe",
-      "username": "johndoe",
-      "message": "Having a great day! Enjoying the sunshine and spending time outdoors. Life is good!",
-      "likes": 20,
-      "liked":true
-    },
-    { "id": 2,
-      "name": "Jane Smith",
-      "username": "janesmith",
-      "message": "Just finished reading a fascinating book. The plot twists kept me on the edge of my seat!",
-      "likes": 15,
-      "liked":false
-    },
-    { "id": 3,
-      "name": "Bob Johnson",
-      "username": "dilshadvln",
-      "message": "Coding all night long! Building something awesome and pushing my limits.",
-      "likes": 30,
-      "liked":true
-    },
-    { "id": 4,
-      "name": "Alice Brown",
-      "username": "alicebrown",
-      "message": "Exploring new places and trying out different cuisines. Foodie adventures!",
-      "likes": 25,
-      "liked":false
-    }
-  ];
   
-  const [tweets,setTweets] = useState(initialTweets)
-  axios.get(`/get-tweets/${user.user_id}`)
-  .then(response => {
-    setTweets(response.data)
-  })
-  .catch(error => {
-    console.error('Error fetching tweets:', error);
-  });
+  const [tweets,setTweets] = useState([])
+  useEffect(()=>{
+    axios.get(`/${user.user_id}`)
+    .then(response => {
+      setTweets(response.data)
+    })
+    .catch(error => {
+      console.error('Error fetching tweets:', error);
+    });
+  },[])
+ 
   const Logout = () => {
   
     localStorage.removeItem('user');
@@ -64,10 +37,35 @@ function HomePage({...user}) {
     };
 
     setTweets((prevTweets) => [...prevTweets, newTweet]);
+    axios.post(`/add-tweet`, {
+      user_id:user.user_id,
+      content:text
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(() => {
+        console.log("Tweet posted");
+      })
+      .catch((error) => {
+        console.error("Something went wrong", error);
+      });
   };
 
   const handleDeleteTweet = (tweetId) => {
     setTweets((prevTweets) => prevTweets.filter((tweet) => tweet.id !== tweetId));
+    axios.post(`/delete-tweet/${user.user_id}/${tweetId}`,null, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => {
+        console.log(response?.data?.message);
+      })
+      .catch((error) => {
+        console.error("Something went wrong", error);
+      });
   };
 
   return (
@@ -86,8 +84,8 @@ function HomePage({...user}) {
         <div className="tweet-section">
           <NewTweet addNewTweet={addNewTweet}/>
           <div className="feed">
-          {tweets.map((tweet) => (
-              <Tweet key={tweet.id} {...tweet} ownTweet={tweet.username === user.username} onDelete={() => handleDeleteTweet(tweet.id)}/>
+          { tweets.map((tweet) => (
+              <Tweet key={tweet.id} {...tweet} ownTweet={tweet.username === user.username} onDelete={() => handleDeleteTweet(tweet.tweet_id)} thisUser={user.user_id} />
             ))}
           </div>
         </div>

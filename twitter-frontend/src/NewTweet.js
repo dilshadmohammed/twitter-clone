@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import './NewTweet.css'
 
+
 function NewTweet({addNewTweet}) {
 
   const [tweetText, setTweetText] = useState('');

@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import './Tweet.css'
+import axios from './axios';
 
 
-function Tweet({id, name, username, message, likes, liked, ownTweet, onDelete, user }) {
-  const [like, setLike] = useState(liked);
-  const [likeCount, setLikeCount] = useState(likes);
-  const [tweet,setTweet] = useState(message);
+function Tweet({id, name,tweet_id,user_id, username, content, like_count, user_liked, ownTweet, onDelete, thisUser}) {
+  const [like, setLike] = useState(user_liked);
+  const [likeCount, setLikeCount] = useState(like_count);
+  const [tweet,setTweet] = useState(content);
   const [editMode,setEditMode] = useState(false);
   const [tweetText,setTweetText] = useState('');
 
@@ -18,11 +19,38 @@ function Tweet({id, name, username, message, likes, liked, ownTweet, onDelete, u
   const handleLike = () => {
     like ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1)
     setLike(!like)
+    axios.post(`/like-unlike-tweet`, {
+      user_id:thisUser,
+      tweet_id:tweet_id
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => {
+        console.log(response?.data?.message);
+      })
+      .catch((error) => {
+        console.error("Something went wrong", error);
+      });
   }
 
   const submitTweet = () => {
     setTweet(tweetText)
     setEditMode(false)
+    axios.post(`/edit-tweet/${thisUser}/${tweet_id}`, {
+      content:tweetText
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => {
+        console.log(response?.data?.message);
+      })
+      .catch((error) => {
+        console.error("Something went wrong", error);
+      });
   }
 
   if(editMode)
@@ -53,7 +81,7 @@ function Tweet({id, name, username, message, likes, liked, ownTweet, onDelete, u
         <span>{likeCount}</span>
         {ownTweet && 
         <div>
-          <img src="/images/delete.png" alt="delete" className='delete-icon' onClick={()=>{onDelete(id)}}/>
+          <img src="/images/delete.png" alt="delete" className='delete-icon' onClick={()=>{onDelete()}}/>
           <img src="/images/edit_icon.png" onClick={()=>{setEditMode(true)}} alt="edit" className="edit-icon" />
         </div>
         }

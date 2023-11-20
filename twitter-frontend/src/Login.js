@@ -1,7 +1,6 @@
 import React , { useEffect, useState } from "react";
 import './Login.css'
 import axios from './axios';
-import {useNavigate} from 'react-router-dom';
 
 function Login() {
 
@@ -22,7 +21,7 @@ function Login() {
     event.preventDefault();
     if (password === cofmPass) {
       axios
-        .post('/sign-up', {
+        .post('/signup', {
           name,
           username:userName,
           email,
@@ -50,7 +49,7 @@ function Login() {
   const handleSignIn = (event) => {
     event.preventDefault();
     axios
-      .post('/sign-in', {
+      .post('/signin', {
         email,
         password,
       })
