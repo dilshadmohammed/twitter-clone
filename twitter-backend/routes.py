@@ -1,8 +1,10 @@
-from flask import render_template, request, redirect, url_for, flash, session
-from app import app, db
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from models import User, Tweet
+from models import db
 
-@app.route('/signup', methods=['GET', 'POST'])
+api = Blueprint('routes', __name__)
+
+@api.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
         username = request.form['username']
@@ -25,7 +27,7 @@ def signup():
 
     return render_template('signup.html')
 
-@app.route('/signin', methods=['GET', 'POST'])
+@api.route('/signin', methods=['GET', 'POST'])
 def signin():
     if request.method == 'POST':
         username = request.form['username']
@@ -42,12 +44,12 @@ def signin():
 
     return render_template('signin.html')
 
-@app.route('/')
+@api.route('/')
 def index():
     tweets = Tweet.query.all()
     return render_template('index.html', tweets=tweets)
 
-@app.route('/add_tweet', methods=['POST'])
+@api.route('/add_tweet', methods=['POST'])
 def add_tweet():
     content = request.form['content']
     new_tweet = Tweet(content=content)
@@ -55,14 +57,14 @@ def add_tweet():
     db.session.commit()
     return redirect(url_for('index'))
 
-@app.route('/delete_tweet/<int:tweet_id>', methods=['POST'])
+@api.route('/delete_tweet/<int:tweet_id>', methods=['POST'])
 def delete_tweet(tweet_id):
     tweet = Tweet.query.get_or_404(tweet_id)
     db.session.delete(tweet)
     db.session.commit()
     return redirect(url_for('index'))
 
-@app.route('/edit_tweet/<int:tweet_id>', methods=['GET', 'POST'])
+@api.route('/edit_tweet/<int:tweet_id>', methods=['GET', 'POST'])
 def edit_tweet(tweet_id):
     tweet = Tweet.query.get_or_404(tweet_id)
 
